@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " N ",
+    "PIP",
+    " B "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "I": {
+      "item": "create_reclamation:industrial_reclaimer"
+    },
+    "B": {
+      "item": "create:brass_block"
+    }
+  },
+  "result": {
+    "id": "create_reclamation:advanced_reclaimer",
+    "count": 1
+  }
+}

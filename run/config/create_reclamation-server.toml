@@ -1,17 +1,45 @@
 #Create: Reclamation Server Configuration
-[reclaimer]
-	#Kinetic stress capacity consumed per RPM by the Mechanical Reclaimer.
+[reclaimer_tiers]
+	#Machine Efficiency Ratings (0.01 to 0.98). No tier may reach 1.0 (100%).
+	#Recovery efficiency of Tier 1 Mechanical Reclaimer (Default: 0.70 / 70%)
+	# Default: 0.7
+	# Range: 0.05 ~ 0.98
+	mechanicalEfficiency = 0.7
+	#Recovery efficiency of Tier 2 Precision Reclaimer (Default: 0.85 / 85%)
+	# Default: 0.85
+	# Range: 0.05 ~ 0.98
+	precisionEfficiency = 0.85
+	#Recovery efficiency of Tier 3 Industrial Reclaimer (Default: 0.94 / 94%)
+	# Default: 0.94
+	# Range: 0.05 ~ 0.98
+	industrialEfficiency = 0.94
+	#Recovery efficiency of Tier 4 Advanced Reclaimer (Default: 0.98 / 98%)
+	# Default: 0.98
+	# Range: 0.05 ~ 0.98
+	advancedEfficiency = 0.98
+
+[stress_impacts]
+	#Stress Capacity (SU per RPM) consumed by Mechanical Reclaimer.
 	# Default: 8.0
 	# Range: 0.0 ~ 1024.0
-	stressImpact = 8.0
-	#Chance (0.0 to 1.0) that a component is recovered intact during dismantling.
-	#Failed rolls produce Salvaged Scrap.
-	# Default: 0.85
-	# Range: 0.0 ~ 1.0
-	defaultSalvageRate = 0.85
-	#Whether items without explicit reclaiming recipes can be dynamically deconstructed from crafting recipes.
-	enableCraftingFallback = true
-	#Minimum rotational speed (RPM) required for the Mechanical Reclaimer to operate.
+	mechanicalStress = 8.0
+	#Stress Capacity (SU per RPM) consumed by Precision Reclaimer.
+	# Default: 12.0
+	# Range: 0.0 ~ 1024.0
+	precisionStress = 12.0
+	#Stress Capacity (SU per RPM) consumed by Industrial Reclaimer.
 	# Default: 16.0
-	# Range: 0.0 ~ 256.0
-	minOperatingSpeed = 16.0
+	# Range: 0.0 ~ 1024.0
+	industrialStress = 16.0
+	#Stress Capacity (SU per RPM) consumed by Advanced Reclaimer.
+	# Default: 24.0
+	# Range: 0.0 ~ 1024.0
+	advancedStress = 24.0
+
+[rules]
+	#Whether items without explicit reclaiming recipes can be dynamically deconstructed from unambiguous crafting recipes.
+	enableCraftingFallback = true
+	#Multiplier for Salvaged Scrap generated from unrecovered material loss.
+	# Default: 1.0
+	# Range: 0.0 ~ 5.0
+	scrapConversionRate = 1.0

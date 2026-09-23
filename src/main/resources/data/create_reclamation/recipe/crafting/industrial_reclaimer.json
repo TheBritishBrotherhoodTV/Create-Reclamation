@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " E ",
+    "TPT",
+    " C "
+  ],
+  "key": {
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "T": {
+      "item": "create:sturdy_sheet"
+    },
+    "P": {
+      "item": "create_reclamation:precision_reclaimer"
+    },
+    "C": {
+      "item": "create:railway_casing"
+    }
+  },
+  "result": {
+    "id": "create_reclamation:industrial_reclaimer",
+    "count": 1
+  }
+}

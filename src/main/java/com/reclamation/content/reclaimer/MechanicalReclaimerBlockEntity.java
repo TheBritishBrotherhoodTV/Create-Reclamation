@@ -1,7 +1,6 @@
 package com.reclamation.content.reclaimer;
 
 import com.reclamation.content.recipe.ReclamationRecipeHelper;
-import com.reclamation.infrastructure.config.ReclamationConfig;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
@@ -27,7 +26,9 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
@@ -71,9 +72,17 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
     private float processingTicks = 0;
     private float totalProcessingTicks = 0;
     private int requiredInputCount = 1;
+    private final Map<String, Float> recoveryAccumulators = new HashMap<>();
 
     public MechanicalReclaimerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+    }
+
+    public ReclaimerTier getTier() {
+        if (getBlockState().getBlock() instanceof MechanicalReclaimerBlock reclaimerBlock) {
+            return reclaimerBlock.getTier();
+        }
+        return ReclaimerTier.MECHANICAL;
     }
 
     public IItemHandler getItemHandler(@Nullable Direction side) {
@@ -102,13 +111,9 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
             return;
         }
 
+        ReclaimerTier tier = getTier();
         float speed = getSpeed();
-        double minSpeed = 16.0;
-        try {
-            if (ReclamationConfig.SERVER_SPEC.isLoaded()) {
-                minSpeed = ReclamationConfig.SERVER.minOperatingSpeed.get();
-            }
-        } catch (Exception ignored) {}
+        double minSpeed = tier.getMinOperatingSpeed();
 
         if (Math.abs(speed) < minSpeed) {
             return;
@@ -128,7 +133,7 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
         if (level.isClientSide) {
             if (totalProcessingTicks > 0) {
                 float speedFactor = Math.abs(speed) / 16.0f;
-                processingTicks = Math.min(totalProcessingTicks, processingTicks + speedFactor);
+                processingTicks = Math.min(totalProcessingTicks, processingTicks + speedFactor * tier.getProcessingSpeedMultiplier());
             }
             return;
         }
@@ -148,8 +153,8 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
             }
         }
 
-        // Speed factor: 16 RPM is 1x normal speed
-        float speedFactor = Math.abs(speed) / 16.0f;
+        // Speed factor: 16 RPM is 1x normal speed, scaled by tier multiplier
+        float speedFactor = (Math.abs(speed) / 16.0f) * tier.getProcessingSpeedMultiplier();
         processingTicks += speedFactor;
 
         // Sync to client periodically every 8 ticks
@@ -191,7 +196,7 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
                 ReclamationRecipeHelper.ReclaimedResult recipe = recipeOpt.get();
                 inputInv.extractItem(0, recipe.consumedInputCount(), false);
 
-                List<ItemStack> rolledOutputs = recipe.rollOutputs(level.random);
+                List<ItemStack> rolledOutputs = recipe.rollOutputs(tier, recoveryAccumulators, level.random);
                 for (ItemStack out : rolledOutputs) {
                     ItemHandlerHelper.insertItemStacked(outputInv, out.copy(), false);
                 }
@@ -249,17 +254,19 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
 
     @Override
     public float calculateStressApplied() {
-        try {
-            if (ReclamationConfig.SERVER_SPEC.isLoaded()) {
-                return ReclamationConfig.SERVER.stressImpact.get().floatValue();
-            }
-        } catch (Exception ignored) {}
-        return 8.0f;
+        return getTier().getStressImpact();
     }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        ReclaimerTier tier = getTier();
+        int tierPercent = Math.round(tier.getEfficiency() * 100);
+
+        tooltip.add(Component.empty());
+        tooltip.add(Component.literal(tier.getDisplayName()).withStyle(ChatFormatting.GOLD)
+                .append(Component.literal(" (" + tierPercent + "% Efficiency)").withStyle(ChatFormatting.YELLOW)));
 
         ItemStack input = getInputStack();
         int outputCount = 0;
@@ -271,9 +278,8 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
         }
 
         if (!input.isEmpty()) {
-            tooltip.add(Component.empty());
             tooltip.add(Component.translatable("create_reclamation.goggles.reclaiming", input.getHoverName())
-                    .withStyle(ChatFormatting.GOLD));
+                    .withStyle(ChatFormatting.AQUA));
 
             float progress = getProcessingProgress();
             int percent = Math.round(progress * 100);
@@ -284,19 +290,18 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
             tooltip.add(Component.literal("  " + percent + "% ")
                     .withStyle(ChatFormatting.YELLOW)
                     .append(Component.literal(bar).withStyle(ChatFormatting.WHITE)));
+
+            tooltip.add(Component.literal("  Potential Scrap: ").withStyle(ChatFormatting.GRAY)
+                    .append(Component.literal("Yes").withStyle(ChatFormatting.DARK_GREEN)));
         } else if (outputCount > 0) {
-            tooltip.add(Component.empty());
-            tooltip.add(Component.literal("Reclamation Complete")
-                    .withStyle(ChatFormatting.GREEN));
+            tooltip.add(Component.literal("Reclamation Complete").withStyle(ChatFormatting.GREEN));
         } else {
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("create_reclamation.goggles.idle")
-                    .withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("create_reclamation.goggles.idle").withStyle(ChatFormatting.GRAY));
         }
 
         if (outputCount > 0) {
             tooltip.add(Component.translatable("create_reclamation.goggles.outputs", outputCount)
-                    .withStyle(ChatFormatting.AQUA));
+                    .withStyle(ChatFormatting.GREEN));
         }
 
         return true;
@@ -315,6 +320,14 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
         processingTicks = compound.getFloat("ProcessingTicks");
         totalProcessingTicks = compound.getFloat("TotalProcessingTicks");
         requiredInputCount = compound.getInt("RequiredInputCount");
+
+        recoveryAccumulators.clear();
+        if (compound.contains("Accumulators")) {
+            CompoundTag accTag = compound.getCompound("Accumulators");
+            for (String key : accTag.getAllKeys()) {
+                recoveryAccumulators.put(key, accTag.getFloat(key));
+            }
+        }
     }
 
     @Override
@@ -326,5 +339,11 @@ public class MechanicalReclaimerBlockEntity extends KineticBlockEntity implement
         compound.putFloat("ProcessingTicks", processingTicks);
         compound.putFloat("TotalProcessingTicks", totalProcessingTicks);
         compound.putInt("RequiredInputCount", requiredInputCount);
+
+        CompoundTag accTag = new CompoundTag();
+        for (Map.Entry<String, Float> entry : recoveryAccumulators.entrySet()) {
+            accTag.putFloat(entry.getKey(), entry.getValue());
+        }
+        compound.put("Accumulators", accTag);
     }
 }

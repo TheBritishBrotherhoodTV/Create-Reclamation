@@ -1,0 +1,4 @@
+_[MECHANICAL] Expected: 0.7000 | Observed: 0.6999 | Total Recovered: 6999 / 10000 | Scrap: 876
+^[PRECISION] Expected: 0.8500 | Observed: 0.8500 | Total Recovered: 8500 / 10000 | Scrap: 233
+^[INDUSTRIAL] Expected: 0.9400 | Observed: 0.9400 | Total Recovered: 9400 / 10000 | Scrap: 30
+[[ADVANCED] Expected: 0.9800 | Observed: 0.9800 | Total Recovered: 9800 / 10000 | Scrap: 4

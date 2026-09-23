@@ -82,4 +82,12 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:${project.flywheel_version}")
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:19.21.0.246")
     runtimeOnly("mezz.jei:jei-1.21.1-neoforge:19.21.0.246")
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
+
+test {
+    useJUnitPlatform()
+}
+

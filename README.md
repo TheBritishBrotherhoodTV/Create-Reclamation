@@ -1,74 +1,62 @@
 # Create: Reclamation ⚙️♻️
 
-**Create: Reclamation** is a standalone, lightweight Create addon for Minecraft 1.21.1 on NeoForge that introduces industrial deconstruction and material recovery through the **Mechanical Reclaimer**.
+**Create: Reclamation** is a standalone, lightweight Create addon for Minecraft 1.21.1 on NeoForge that introduces industrial material recovery and reclaimer progression through 4 machine tiers.
 
 ---
 
-## Features
+## ⚙️ Core Philosophy
 
-- **The Mechanical Reclaimer (`create_reclamation:mechanical_reclaimer`)**:
-  - Mechanically dismantles manufactured items, machines, and tools back into their constituent ingredients.
-  - Powered by Create kinetics via a rear shaft socket.
-  - Stress Impact: **8.0 capacity / RPM** (configurable).
-  - Faster rotational speeds (RPM) accelerate dismantling throughput.
-  - Fully animated 3D recessed gearbox casing and depot processing plate.
-
-- **Kinetic Audio & Particle VFX**:
-  - Mechanical grinding and ratcheting audio dynamically pitch-scaled to machine RPM.
-  - Emits item debris and machine sparks while active, followed by satisfying metallic anvil completion cues.
-
-- **Scrap Balancing System (`Salvaged Scrap`)**:
-  - Fragile or fractured components broken during violent mechanical deconstruction yield **Salvaged Scrap**.
-  - Salvaged Scrap can be recycled in a Furnace or Blast Furnace into **Iron Nuggets**.
-
-- **Create Logistics Integration**:
-  - Direct belt input support (`DirectBeltInputBehaviour`) allowing **Create Funnels, Chutes, Belts, and Hoppers** to feed and extract items automatically.
-
-- **Engineer's Goggles In-World HUD**:
-  - Wearing Engineer's Goggles reveals live machine status (`Dismantling: [Item]`), real-time animated progress bars (`[======>   ] 65%`), and output buffer diagnostics.
-
-- **Create Display Link Integration**:
-  - Attach a **Display Link** to project live dismantling progress bars and percentages directly onto **Nixie Tubes** and **Flap Display Boards**.
-
-- **JEI & Ponder Integration**:
-  - Interactive, multi-scene 3D **Ponder** tutorials for basic operation and automated reclamation lines.
-  - Full **JEI (Just Enough Items)** category with salvage drop chances and scrap tooltips.
+The Reclaimer is **not** an "uncrafting table" — it is an industrial material recovery machine. Dismantling manufactured items produces controlled material loss, and recovery is governed by machine tier efficiency, material recoverability, and fair accumulation.
 
 ---
 
-## Datapack Custom Recipes (`create_reclamation:reclaiming`)
+## 🏆 Reclaimer Machine Tiers
 
-Datapacks and modpacks can define custom dismantling recipes with individual per-item drop chances:
+| Tier | Efficiency | Stress Impact | Min RPM | Speed Multiplier | Key Material / Role |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Mechanical Reclaimer** | **70%** | 8.0 SU | 16 RPM | 1.00× | Andesite / Entry-level recovery |
+| **Precision Reclaimer** | **85%** | 12.0 SU | 32 RPM | 1.25× | Brass / Precision dismantled parts |
+| **Industrial Reclaimer** | **94%** | 16.0 SU | 32 RPM | 1.50× | Sturdy Sheet / High-throughput factory scale |
+| **Advanced Reclaimer** | **98%** | 24.0 SU | 64 RPM | 2.00× | Netherite / Late-game precision recovery |
 
-```json
-{
-  "type": "create_reclamation:reclaiming",
-  "ingredient": {
-    "item": "create:andesite_casing"
-  },
-  "input_count": 1,
-  "processing_time": 60,
-  "min_speed": 16,
-  "results": [
-    {
-      "item": {
-        "id": "create:andesite_alloy",
-        "count": 1
-      },
-      "chance": 0.9
-    },
-    {
-      "item": {
-        "id": "minecraft:stripped_oak_log",
-        "count": 1
-      },
-      "chance": 0.85
-    }
-  ]
-}
-```
+*Note: No reclaimer ever reaches 100% recovery.*
 
-*Note: If no explicit custom recipe is provided, the Mechanical Reclaimer automatically deconstructs any valid crafting recipe dynamically.*
+---
+
+## 🔬 Smart Salvage System
+
+1. **Fair Accumulator Recovery**:
+   - Uses stateful fractional probability accumulators per item type (`recoveryAccumulator += effectiveRate`).
+   - When the accumulator crosses `1.0`, integer items are guaranteed.
+   - Long-term throughput converges strictly to the machine's advertised efficiency without punishing random streaks.
+2. **Material Categories**:
+   - **EASY** (1.00× base recoverability): Ingots, Nuggets, Sheets, Shafts, Casings, Stone.
+   - **STANDARD** (0.90× base recoverability): Andesite Alloy, Gearboxes, Funnels, Chutes, standard manufactured items.
+   - **DIFFICULT** (0.75× base recoverability): Precision Mechanisms, Electron Tubes, Controllers, Netherite/Diamond components.
+3. **Salvaged Scrap**:
+   - Unrecovered material fractions are converted into **Salvaged Scrap** based on lost material, which can be recycled into Iron Nuggets.
+
+---
+
+## 🛡️ Recipe Safety & Loop Protection
+
+- **Authoritative Explicit Recipes**: `create_reclamation:reclaiming` recipes take strict priority.
+- **Conservative Dynamic Fallback**: Only simple, unambiguous crafting recipes are automatically deconstructed.
+- **Recipe Ambiguity Protection**: Items with multiple conflicting crafting recipes (e.g. Chests from different woods) are rejected unless explicitly defined.
+- **Anti-Exploit Protection**:
+  - Damaged tools and armor are rejected to prevent infinite durability/repair exploits.
+  - Single-ingredient recipes (e.g. 1 Ingot → 9 Nuggets or 1 Log → 4 Planks) are rejected.
+  - Circular recipes (`Output == Input`) are rejected.
+- **Exclusions**: Sequenced assembly, fluid recipes, and multi-stage transformations require explicit JSON recipes.
+
+---
+
+## 📊 Logistics, Goggles & JEI
+
+- **Engineer's Goggles HUD**: Live in-world display of current target, machine efficiency, expected recovery outputs, scrap possibility, and speed-scaled animated progress.
+- **Create Display Link**: Transmit dismantling progress to Nixie Tubes and Flap Displays.
+- **JEI Integration**: Category showing recoverable outputs, material categories, tier-by-tier recovery chances, and scrap fallback.
+- **Full Automation**: Direct belt input support with Funnels, Chutes, Belts, and Hoppers.
 
 ---
 
@@ -76,22 +64,15 @@ Datapacks and modpacks can define custom dismantling recipes with individual per
 
 | Setting | Default | Description |
 | :--- | :---: | :--- |
-| `stressImpact` | `8.0` | Kinetic stress consumed per RPM. |
-| `defaultSalvageRate` | `0.85` | Probability (0.0–1.0) to recover components intact without scrap. |
-| `enableCraftingFallback` | `true` | Toggle dynamic crafting recipe deconstruction fallback. |
-| `minOperatingSpeed` | `16.0` | Minimum RPM required for the machine to operate. |
-
----
-
-## Crafting Recipe
-
-| Grid | Ingredients |
-| :---: | :--- |
-| **Top** | Empty \| `create:brass_hand` \| Empty |
-| **Middle** | `create:shaft` \| `create:brass_casing` \| `create:shaft` |
-| **Bottom** | Empty \| `create:andesite_alloy` \| Empty |
+| `mechanicalEfficiency` | `0.70` | Mechanical Reclaimer recovery efficiency (70%). |
+| `precisionEfficiency` | `0.85` | Precision Reclaimer recovery efficiency (85%). |
+| `industrialEfficiency` | `0.94` | Industrial Reclaimer recovery efficiency (94%). |
+| `advancedEfficiency` | `0.98` | Advanced Reclaimer recovery efficiency (98%, capped at 0.98). |
+| `scrapConversionRate` | `1.0` | Multiplier for Salvaged Scrap generation on unrecovered fractions. |
+| `enableCraftingFallback` | `true` | Enable safe dynamic crafting recipe deconstruction fallback. |
 
 ---
 
 ## License
 MIT License. Created for the Create mod ecosystem.
+

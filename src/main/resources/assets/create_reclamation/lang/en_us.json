@@ -1,6 +1,9 @@
 {
   "itemGroup.create_reclamation.main": "Create: Reclamation",
   "block.create_reclamation.mechanical_reclaimer": "Mechanical Reclaimer",
+  "block.create_reclamation.precision_reclaimer": "Precision Reclaimer",
+  "block.create_reclamation.industrial_reclaimer": "Industrial Reclaimer",
+  "block.create_reclamation.advanced_reclaimer": "Advanced Reclaimer",
   "item.create_reclamation.salvaged_scrap": "Salvaged Scrap",
   "create_reclamation.reclaimer.empty": "Reclaimer is empty. Insert a crafted item to dismantle.",
   "create_reclamation.reclaimer.reclaiming": "Reclaiming: %s (%s%%)",

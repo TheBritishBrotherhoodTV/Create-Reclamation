@@ -25,9 +25,20 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public class MechanicalReclaimerBlock extends HorizontalKineticBlock implements IBE<MechanicalReclaimerBlockEntity> {
 
+    private final ReclaimerTier tier;
+
     public MechanicalReclaimerBlock(Properties properties) {
+        this(properties, ReclaimerTier.MECHANICAL);
+    }
+
+    public MechanicalReclaimerBlock(Properties properties, ReclaimerTier tier) {
         super(properties);
+        this.tier = tier;
         registerDefaultState(defaultBlockState().setValue(HORIZONTAL_FACING, Direction.NORTH));
+    }
+
+    public ReclaimerTier getTier() {
+        return tier;
     }
 
     @Override

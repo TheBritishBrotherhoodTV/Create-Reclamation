@@ -1,6 +1,8 @@
 package com.reclamation.infrastructure.jei;
 
 import com.reclamation.CreateReclamation;
+import com.reclamation.content.recipe.ReclamationRecipeHelper.SalvageOutput;
+import com.reclamation.content.reclaimer.ReclaimerTier;
 import com.reclamation.registry.ModBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -15,9 +17,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public class ReclaimingCategory implements IRecipeCategory<JEIReclaimRecipe> {
 
@@ -76,25 +75,30 @@ public class ReclaimingCategory implements IRecipeCategory<JEIReclaimRecipe> {
         int slotSize = 19;
 
         for (int i = 0; i < Math.min(9, recipe.outputs().size()); i++) {
-            var output = recipe.outputs().get(i);
+            SalvageOutput output = recipe.outputs().get(i);
             int row = i / 3;
             int col = i % 3;
             int x = startX + col * slotSize;
             int y = startY + row * slotSize;
 
-            final float chance = output.chance();
             var slot = builder.addSlot(RecipeIngredientRole.OUTPUT, x, y)
                     .addItemStack(output.stack());
 
-            if (chance < 1.0f) {
-                int percent = Math.round(chance * 100);
-                slot.addTooltipCallback((slotsView, tooltip) -> {
-                    tooltip.add(Component.literal(percent + "% Salvage Chance")
-                            .withStyle(ChatFormatting.GOLD));
-                    tooltip.add(Component.literal((100 - percent) + "% Scrap Fallback")
-                            .withStyle(ChatFormatting.DARK_GRAY));
-                });
-            }
+            slot.addTooltipCallback((slotsView, tooltip) -> {
+                tooltip.add(Component.literal("Salvage Recoverability:").withStyle(ChatFormatting.GOLD));
+                tooltip.add(Component.literal(" • Category: " + output.category().name()).withStyle(ChatFormatting.GRAY));
+                
+                int mechRate = Math.round(output.calculateEffectiveRate(ReclaimerTier.MECHANICAL) * 100);
+                int precRate = Math.round(output.calculateEffectiveRate(ReclaimerTier.PRECISION) * 100);
+                int indRate = Math.round(output.calculateEffectiveRate(ReclaimerTier.INDUSTRIAL) * 100);
+                int advRate = Math.round(output.calculateEffectiveRate(ReclaimerTier.ADVANCED) * 100);
+
+                tooltip.add(Component.literal(" • Mechanical (70%): " + mechRate + "%").withStyle(ChatFormatting.DARK_AQUA));
+                tooltip.add(Component.literal(" • Precision (85%): " + precRate + "%").withStyle(ChatFormatting.AQUA));
+                tooltip.add(Component.literal(" • Industrial (94%): " + indRate + "%").withStyle(ChatFormatting.BLUE));
+                tooltip.add(Component.literal(" • Advanced (98%): " + advRate + "%").withStyle(ChatFormatting.LIGHT_PURPLE));
+                tooltip.add(Component.literal("Unrecovered material yields Salvaged Scrap").withStyle(ChatFormatting.DARK_GRAY));
+            });
         }
     }
 
@@ -105,14 +109,15 @@ public class ReclaimingCategory implements IRecipeCategory<JEIReclaimRecipe> {
 
         // Display processing time in seconds
         float seconds = recipe.processingTime() / 20.0f;
-        String timeStr = String.format("%.1fs", seconds);
+        String timeStr = String.format("%.1fs @ 16 RPM", seconds);
         guiGraphics.drawString(
                 net.minecraft.client.Minecraft.getInstance().font,
                 timeStr,
-                48,
-                48,
+                16,
+                60,
                 0x777777,
                 false
         );
     }
 }
+
