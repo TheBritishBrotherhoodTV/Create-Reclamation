@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
@@ -14,7 +13,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -30,17 +28,13 @@ public class MechanicalReclaimerRenderer extends KineticBlockEntityRenderer<Mech
     @Override
     protected void renderSafe(MechanicalReclaimerBlockEntity be, float partialTicks, PoseStack ms,
                               MultiBufferSource buffer, int light, int overlay) {
-        // Render fallback kinetic shaft if Flywheel instancing is not active
-        if (!VisualizationManager.supportsVisualization(be.getLevel())) {
-            BlockState state = be.getBlockState();
-            Direction facing = state.getValue(MechanicalReclaimerBlock.HORIZONTAL_FACING);
-            Direction opposite = facing.getOpposite();
-            BlockPos lightPos = be.getBlockPos().relative(opposite);
-            int shaftLight = LevelRenderer.getLightColor(be.getLevel(), lightPos);
+        // Render kinetic half-shaft at rear socket
+        BlockState state = be.getBlockState();
+        Direction facing = state.getValue(MechanicalReclaimerBlock.HORIZONTAL_FACING);
+        Direction opposite = facing.getOpposite();
 
-            SuperByteBuffer shaft = CachedBuffers.partialFacing(AllPartialModels.SHAFT_HALF, state, opposite);
-            standardKineticRotationTransform(shaft, be, shaftLight).renderInto(ms, buffer.getBuffer(RenderType.solid()));
-        }
+        SuperByteBuffer shaft = CachedBuffers.partialFacing(AllPartialModels.SHAFT_HALF, state, opposite);
+        standardKineticRotationTransform(shaft, be, light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
 
         // Render in-world item on top plate (render active input, or resting output results)
         ItemStack displayStack = be.getInputStack();

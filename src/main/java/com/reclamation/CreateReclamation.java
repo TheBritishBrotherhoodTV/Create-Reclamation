@@ -43,6 +43,7 @@ public class CreateReclamation {
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modEventBus.addListener(CreateReclamation::onClientSetup);
+            modEventBus.addListener(CreateReclamation::onRegisterRenderers);
         }
 
         REGISTRATE.registerEventListeners(modEventBus);
@@ -64,5 +65,12 @@ public class CreateReclamation {
         event.enqueueWork(() -> {
             PonderIndex.addPlugin(new ReclamationPonderPlugin());
         });
+    }
+
+    public static void onRegisterRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.MECHANICAL_RECLAIMER.get(),
+                com.reclamation.content.reclaimer.MechanicalReclaimerRenderer::new
+        );
     }
 }
