@@ -1,0 +1,105 @@
+---- Minecraft Crash Report ----
+// Uh... Did I do that?
+
+Time: 2026-09-23 21:43:50
+Description: Mod loading failures have occurred; consult the issue messages for more details
+
+net.neoforged.neoforge.logging.CrashReportExtender$ModLoadingCrashException: Mod loading has failed
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Mod loading issue for: create --
+Details:
+	Mod file: /C:/Users/Curti/.gradle/caches/modules-2/files-2.1/curse.maven/create-328085/7963363/e97e49837bed766e6f28a4c95b04885d6acc353/create-328085-7963363.jar
+	Failure message: Mod create requires ponder 1.0.82 or above
+		Currently, ponder is 1.0.69
+		
+	Mod version: 6.0.10
+	Mod issues URL: https://github.com/Creators-of-Create/Create/issues
+	Exception message: <No associated exception found>
+
+-- Mod loading issue for: create --
+Details:
+	Mod file: /C:/Users/Curti/.gradle/caches/modules-2/files-2.1/curse.maven/create-328085/7963363/e97e49837bed766e6f28a4c95b04885d6acc353/create-328085-7963363.jar
+	Failure message: Mod create requires neoforge 21.1.219 or above
+		Currently, neoforge is 21.1.77
+		
+	Mod version: 6.0.10
+	Mod issues URL: https://github.com/Creators-of-Create/Create/issues
+	Exception message: <No associated exception found>
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.11, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 103472384 bytes (98 MiB) / 541065216 bytes (516 MiB) up to 8573157376 bytes (8176 MiB)
+	CPUs: 16
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 7 3700X 8-Core Processor             
+	Identifier: AuthenticAMD Family 23 Model 113 Stepping 0
+	Microarchitecture: Zen 2
+	Frequency (GHz): 3.60
+	Number of physical packages: 1
+	Number of physical CPUs: 8
+	Number of logical CPUs: 16
+	Graphics card #0 name: Intel(R) HD Graphics 530
+	Graphics card #0 vendor: Intel Corporation
+	Graphics card #0 VRAM (MiB): 1024.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 27.20.100.9664
+	Graphics card #1 name: NVIDIA Quadro K2200
+	Graphics card #1 vendor: NVIDIA
+	Graphics card #1 VRAM (MiB): 4096.00
+	Graphics card #1 deviceId: VideoController2
+	Graphics card #1 versionInfo: 10.18.13.5330
+	Graphics card #2 name: Radeon RX 5500 XT
+	Graphics card #2 vendor: Advanced Micro Devices, Inc.
+	Graphics card #2 VRAM (MiB): 8176.00
+	Graphics card #2 deviceId: VideoController3
+	Graphics card #2 versionInfo: 32.0.21030.2001
+	Graphics card #3 name: NVIDIA GeForce RTX 3060
+	Graphics card #3 vendor: NVIDIA
+	Graphics card #3 VRAM (MiB): 12288.00
+	Graphics card #3 deviceId: VideoController4
+	Graphics card #3 versionInfo: 32.0.16.1062
+	Memory slot #0 capacity (MiB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 2.40
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MiB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 2.40
+	Memory slot #1 type: DDR4
+	Memory slot #2 capacity (MiB): 8192.00
+	Memory slot #2 clockSpeed (GHz): 2.40
+	Memory slot #2 type: DDR4
+	Virtual memory max (MiB): 44468.88
+	Virtual memory used (MiB): 35785.82
+	Swap memory total (MiB): 11776.00
+	Swap memory used (MiB): 131.21
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 3221.10, total: 237404.00
+	Space in storage for workdir (MiB): available: 3221.10, total: 237404.00
+	JVM Flags: 0 total; 
+	ModLauncher: 11.0.4+main.d2e20e43
+	ModLauncher launch target: forgeclientuserdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.31.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.31.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.31.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.4.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.4.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		neoforge-21.1.77.jar                              |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.77.jar                              |NeoForge                      |neoforge                      |21.1.77             |Manifest: NOSIGNATURE

@@ -1,0 +1,26 @@
+{
+  "itemGroup.create_reclamation.main": "Create: Reclamation",
+  "block.create_reclamation.mechanical_reclaimer": "Mechanical Reclaimer",
+  "item.create_reclamation.salvaged_scrap": "Salvaged Scrap",
+  "create_reclamation.reclaimer.empty": "Reclaimer is empty. Insert a crafted item to dismantle.",
+  "create_reclamation.reclaimer.reclaiming": "Reclaiming: %s (%s%%)",
+  "create_reclamation.goggles.idle": "Reclaimer Idle",
+  "create_reclamation.goggles.reclaiming": "Dismantling: %s",
+  "create_reclamation.goggles.outputs": "Stored Output Items: %s",
+
+  "create_reclamation.ponder.tag.reclamation": "Mechanical Reclamation",
+  "create_reclamation.ponder.tag.reclamation.description": "Dismantle manufactured items into constituent ingredients using Create kinetics.",
+  "create_reclamation.ponder.mechanical_reclaimer.header": "Reclaiming Manufactured Items",
+  "create_reclamation.ponder.mechanical_reclaimer.text_1": "The Mechanical Reclaimer dismantles crafted items into their constituent ingredients.",
+  "create_reclamation.ponder.mechanical_reclaimer.text_2": "It requires rotational power supplied to its rear shaft socket to operate.",
+  "create_reclamation.ponder.mechanical_reclaimer.text_3": "Right-click or supply manufactured items (such as a Mechanical Press) to begin dismantling.",
+  "create_reclamation.ponder.mechanical_reclaimer.text_4": "Higher rotational speeds (RPM) accelerate the dismantling process.",
+  "create_reclamation.ponder.mechanical_reclaimer.text_5": "Recovered ingredients can be extracted manually or automatically using Create Funnels, Chutes, and Hoppers.",
+
+  "create_reclamation.display_source.reclaimer_progress": "Reclamation Progress",
+
+  "advancement.create_reclamation.root": "Industrial Reclamation",
+  "advancement.create_reclamation.root.desc": "Obtain a Mechanical Reclaimer to begin recycling manufactured items.",
+  "advancement.create_reclamation.salvaged_scrap": "Zero Waste",
+  "advancement.create_reclamation.salvaged_scrap.desc": "Recover Salvaged Scrap from machine deconstruction."
+}

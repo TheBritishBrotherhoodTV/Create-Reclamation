@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "create_reclamation:mechanical_reclaimer"
+    },
+    "title": {
+      "translate": "advancement.create_reclamation.root"
+    },
+    "description": {
+      "translate": "advancement.create_reclamation.root.desc"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_reclaimer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "create_reclamation:mechanical_reclaimer"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_reclaimer"
+    ]
+  ]
+}

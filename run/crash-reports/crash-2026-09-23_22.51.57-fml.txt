@@ -1,0 +1,153 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 2026-09-23 22:51:57
+Description: Mod loading failures have occurred; consult the issue messages for more details
+
+net.neoforged.neoforge.logging.CrashReportExtender$ModLoadingCrashException: Mod loading has failed
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:220) ~[securejarhandler-3.0.8.jar:?] {}
+-- Mod loading issue for: ponder --
+Details:
+	Caused by 0: java.lang.NoClassDefFoundError: com/reclamation/infrastructure/ponder/ReclamationPonders
+		at TRANSFORMER/create_reclamation@0.1.0/com.reclamation.infrastructure.ponder.ReclamationPonderPlugin.registerScenes(ReclamationPonderPlugin.java:20) ~[%23191!/:?] {re:classloading}
+		at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.foundation.PonderIndex.lambda$registerAll$1(PonderIndex.java:74) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[?:?] {re:mixin}
+		at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.foundation.PonderIndex.forEachPlugin(PonderIndex.java:53) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+		at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.foundation.PonderIndex.registerAll(PonderIndex.java:74) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+		at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.PonderClient.modLoadCompleted(PonderClient.java:47) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+		at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.NeoForgePonderClient$ModBusClientEvents.loadCompleted(NeoForgePonderClient.java:118) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+		at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%23150!/:?] {}
+		at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:328) ~[bus-8.0.5.jar%23150!/:?] {}
+		at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:158) ~[loader-4.0.44.jar%23146!/:4.0] {}
+		at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.ModLoader.lambda$dispatchParallelEvent$4(ModLoader.java:172) ~[loader-4.0.44.jar%23146!/:4.0] {re:mixin}
+		at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.ModLoader.lambda$dispatchParallelTask$7(ModLoader.java:231) ~[loader-4.0.44.jar%23146!/:4.0] {re:mixin}
+		at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934) ~[?:?] {re:mixin}
+		at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911) ~[?:?] {}
+		at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483) ~[?:?] {}
+		at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?] {}
+		at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?] {}
+		at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?] {}
+		at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?] {}
+		at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?] {}
+
+	Mod file: /C:/Users/Curti/.gradle/caches/modules-2/files-2.1/net.createmod.ponder/ponder-neoforge/1.0.87+mc1.21.1/7783eeff0389f8c6003457133b9dd98e903266c6/ponder-neoforge-1.0.87+mc1.21.1.jar
+	Failure message: Ponder (ponder) encountered an error while dispatching the net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent event
+		java.lang.NoClassDefFoundError: com/reclamation/infrastructure/ponder/ReclamationPonders
+	Mod version: 1.0.87+mc1.21.1
+	Mod issues URL: https://github.com/Creators-of-Create/Ponder/issues
+	Exception message: java.lang.ClassNotFoundException: com.reclamation.infrastructure.ponder.ReclamationPonders
+Stacktrace:
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:220) ~[securejarhandler-3.0.8.jar:?] {}
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526) ~[?:?] {}
+	at TRANSFORMER/create_reclamation@0.1.0/com.reclamation.infrastructure.ponder.ReclamationPonderPlugin.registerScenes(ReclamationPonderPlugin.java:20) ~[%23191!/:?] {re:classloading}
+	at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.foundation.PonderIndex.lambda$registerAll$1(PonderIndex.java:74) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[?:?] {re:mixin}
+	at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.foundation.PonderIndex.forEachPlugin(PonderIndex.java:53) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+	at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.foundation.PonderIndex.registerAll(PonderIndex.java:74) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+	at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.PonderClient.modLoadCompleted(PonderClient.java:47) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+	at TRANSFORMER/ponder@1.0.87+mc1.21.1/net.createmod.ponder.NeoForgePonderClient$ModBusClientEvents.loadCompleted(NeoForgePonderClient.java:118) ~[ponder-neoforge-1.0.87+mc1.21.1.jar%23194!/:1.0.87+mc1.21.1] {re:classloading}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar%23150!/:?] {}
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:328) ~[bus-8.0.5.jar%23150!/:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:158) ~[loader-4.0.44.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.ModLoader.lambda$dispatchParallelEvent$4(ModLoader.java:172) ~[loader-4.0.44.jar%23146!/:4.0] {re:mixin}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.ModLoader.lambda$dispatchParallelTask$7(ModLoader.java:231) ~[loader-4.0.44.jar%23146!/:4.0] {re:mixin}
+	at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934) ~[?:?] {re:mixin}
+	at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911) ~[?:?] {}
+	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483) ~[?:?] {}
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?] {}
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?] {}
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?] {}
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?] {}
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.11, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 843566312 bytes (804 MiB) / 1468006400 bytes (1400 MiB) up to 8573157376 bytes (8176 MiB)
+	CPUs: 16
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 7 3700X 8-Core Processor             
+	Identifier: AuthenticAMD Family 23 Model 113 Stepping 0
+	Microarchitecture: Zen 2
+	Frequency (GHz): 3.60
+	Number of physical packages: 1
+	Number of physical CPUs: 8
+	Number of logical CPUs: 16
+	Graphics card #0 name: Intel(R) HD Graphics 530
+	Graphics card #0 vendor: Intel Corporation
+	Graphics card #0 VRAM (MiB): 1024.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 27.20.100.9664
+	Graphics card #1 name: NVIDIA Quadro K2200
+	Graphics card #1 vendor: NVIDIA
+	Graphics card #1 VRAM (MiB): 4096.00
+	Graphics card #1 deviceId: VideoController2
+	Graphics card #1 versionInfo: 10.18.13.5330
+	Graphics card #2 name: Radeon RX 5500 XT
+	Graphics card #2 vendor: Advanced Micro Devices, Inc.
+	Graphics card #2 VRAM (MiB): 8176.00
+	Graphics card #2 deviceId: VideoController3
+	Graphics card #2 versionInfo: 32.0.21030.2001
+	Graphics card #3 name: NVIDIA GeForce RTX 3060
+	Graphics card #3 vendor: NVIDIA
+	Graphics card #3 VRAM (MiB): 12288.00
+	Graphics card #3 deviceId: VideoController4
+	Graphics card #3 versionInfo: 32.0.16.1062
+	Memory slot #0 capacity (MiB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 2.40
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MiB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 2.40
+	Memory slot #1 type: DDR4
+	Memory slot #2 capacity (MiB): 8192.00
+	Memory slot #2 clockSpeed (GHz): 2.40
+	Memory slot #2 type: DDR4
+	Virtual memory max (MiB): 44468.88
+	Virtual memory used (MiB): 36307.52
+	Swap memory total (MiB): 11776.00
+	Swap memory used (MiB): 147.45
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 3084.45, total: 237404.00
+	Space in storage for workdir (MiB): available: 3084.45, total: 237404.00
+	JVM Flags: 0 total; 
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeclientdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.44.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.44.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.44.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		create-328085-7963363.jar                         |Create                        |create                        |6.0.10              |Manifest: NOSIGNATURE
+		main                                              |Create: Reclamation           |create_reclamation            |0.1.0               |Manifest: NOSIGNATURE
+		flywheel-neoforge-1.21.1-1.0.4.jar                |Flywheel                      |flywheel                      |1.0.4               |Manifest: NOSIGNATURE
+		jei-1.21.1-neoforge-19.21.0.246.jar               |Just Enough Items             |jei                           |19.21.0.246         |Manifest: NOSIGNATURE
+		neoforge-21.1.251.jar                             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.251.jar                             |NeoForge                      |neoforge                      |21.1.251            |Manifest: NOSIGNATURE
+		ponder-neoforge-1.0.87+mc1.21.1.jar               |Ponder                        |ponder                        |1.0.87+mc1.21.1     |Manifest: NOSIGNATURE
+	Crash Report UUID: e0bb0f83-2f1d-48fd-9d79-932bfc002f89
+	FML: 4.0.44
+	NeoForge: 21.1.251
+	Flywheel Backend: flywheel:off

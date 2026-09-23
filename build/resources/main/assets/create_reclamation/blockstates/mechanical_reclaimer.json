@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "create_reclamation:block/mechanical_reclaimer"
+    },
+    "facing=south": {
+      "model": "create_reclamation:block/mechanical_reclaimer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "create_reclamation:block/mechanical_reclaimer",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "create_reclamation:block/mechanical_reclaimer",
+      "y": 90
+    }
+  }
+}

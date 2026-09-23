@@ -1,0 +1,25 @@
+{
+  "type": "create_reclamation:reclaiming",
+  "ingredient": {
+    "item": "create:andesite_casing"
+  },
+  "input_count": 1,
+  "processing_time": 60,
+  "min_speed": 16,
+  "results": [
+    {
+      "item": {
+        "id": "create:andesite_alloy",
+        "count": 1
+      },
+      "chance": 0.9
+    },
+    {
+      "item": {
+        "id": "minecraft:stripped_oak_log",
+        "count": 1
+      },
+      "chance": 0.85
+    }
+  ]
+}
