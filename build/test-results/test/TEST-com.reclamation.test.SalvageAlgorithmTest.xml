@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.reclamation.test.SalvageAlgorithmTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-09-24T11:41:16.574Z" hostname="RHOSERVER" time="0.047">
+<testsuite name="com.reclamation.test.SalvageAlgorithmTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-09-24T11:51:08.246Z" hostname="RHOSERVER" time="0.071">
   <properties/>
-  <testcase name="testMaterialCategoryRecoverability()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.021"/>
-  <testcase name="testStatefulAccumulationConsistency()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.001"/>
-  <testcase name="testTierEfficienciesNeverReachHundredPercent()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.01"/>
-  <testcase name="testMonteCarloConvergence10000Runs()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.01"/>
+  <testcase name="testMaterialCategoryRecoverability()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.036"/>
+  <testcase name="testStatefulAccumulationConsistency()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.003"/>
+  <testcase name="testTierEfficienciesNeverReachHundredPercent()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.012"/>
+  <testcase name="testMonteCarloConvergence10000Runs()" classname="com.reclamation.test.SalvageAlgorithmTest" time="0.013"/>
   <system-out><![CDATA[[MECHANICAL] Expected: 0.7000 | Observed: 0.6999 | Total Recovered: 6999 / 10000 | Scrap: 876
 [PRECISION] Expected: 0.8500 | Observed: 0.8500 | Total Recovered: 8500 / 10000 | Scrap: 233
 [INDUSTRIAL] Expected: 0.9400 | Observed: 0.9400 | Total Recovered: 9400 / 10000 | Scrap: 30

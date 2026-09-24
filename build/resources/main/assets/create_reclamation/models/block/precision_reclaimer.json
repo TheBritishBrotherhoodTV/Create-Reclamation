@@ -34,7 +34,7 @@
 			}
 		},
 		{
-			"name": "Top",
+			"name": "Top_Frame",
 			"from": [0, 14, 0],
 			"to": [16, 16, 16],
 			"faces": {
@@ -42,9 +42,22 @@
 				"east": {"uv": [0, 0, 16, 2], "texture": "#casing"},
 				"south": {"uv": [0, 0, 16, 2], "texture": "#casing"},
 				"west": {"uv": [0, 0, 16, 2], "texture": "#casing"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#casing"},
 				"down": {"uv": [0, 0, 16, 16], "texture": "#casing"}
+			}
+		},
+		{
+			"name": "Top_Plate",
+			"from": [1, 15.5, 1],
+			"to": [15, 16.02, 15],
+			"faces": {
+				"north": {"uv": [1, 14, 15, 15], "texture": "#casing"},
+				"east": {"uv": [1, 14, 15, 15], "texture": "#casing"},
+				"south": {"uv": [1, 14, 15, 15], "texture": "#casing"},
+				"west": {"uv": [1, 14, 15, 15], "texture": "#casing"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#top"}
 			}
 		}
 	]
 }
+
