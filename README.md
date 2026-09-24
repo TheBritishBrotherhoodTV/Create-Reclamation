@@ -60,19 +60,56 @@ The Reclaimer is **not** an "uncrafting table" — it is an industrial material 
 
 ---
 
+## 🔨 Crafting Recipes
+
+### 1. Mechanical Reclaimer (Tier 1)
+| Grid | Ingredients |
+| :---: | :--- |
+| **Top** | Empty \| `create:brass_hand` \| Empty |
+| **Middle** | `create:shaft` \| `create:brass_casing` \| `create:shaft` |
+| **Bottom** | Empty \| `create:andesite_alloy` \| Empty |
+
+### 2. Precision Reclaimer (Tier 2)
+| Grid | Ingredients |
+| :---: | :--- |
+| **Top** | Empty \| `create:precision_mechanism` \| Empty |
+| **Middle** | `create:brass_sheet` \| `create_reclamation:mechanical_reclaimer` \| `create:brass_sheet` |
+| **Bottom** | Empty \| `create:brass_casing` \| Empty |
+
+### 3. Industrial Reclaimer (Tier 3)
+| Grid | Ingredients |
+| :---: | :--- |
+| **Top** | Empty \| `create:electron_tube` \| Empty |
+| **Middle** | `create:sturdy_sheet` \| `create_reclamation:precision_reclaimer` \| `create:sturdy_sheet` |
+| **Bottom** | Empty \| `create:railway_casing` \| Empty |
+
+### 4. Advanced Reclaimer (Tier 4)
+| Grid | Ingredients |
+| :---: | :--- |
+| **Top** | Empty \| `minecraft:netherite_ingot` \| Empty |
+| **Middle** | `create:precision_mechanism` \| `create_reclamation:industrial_reclaimer` \| `create:precision_mechanism` |
+| **Bottom** | Empty \| `create:brass_block` \| Empty |
+
+---
+
 ## Configuration (`config/create_reclamation-server.toml`)
 
-| Setting | Default | Description |
-| :--- | :---: | :--- |
-| `mechanicalEfficiency` | `0.70` | Mechanical Reclaimer recovery efficiency (70%). |
-| `precisionEfficiency` | `0.85` | Precision Reclaimer recovery efficiency (85%). |
-| `industrialEfficiency` | `0.94` | Industrial Reclaimer recovery efficiency (94%). |
-| `advancedEfficiency` | `0.98` | Advanced Reclaimer recovery efficiency (98%, capped at 0.98). |
-| `scrapConversionRate` | `1.0` | Multiplier for Salvaged Scrap generation on unrecovered fractions. |
-| `enableCraftingFallback` | `true` | Enable safe dynamic crafting recipe deconstruction fallback. |
+| Category | Setting | Default | Description |
+| :--- | :--- | :---: | :--- |
+| **Efficiency** | `mechanicalEfficiency` | `0.70` | Mechanical Reclaimer recovery efficiency (70%). |
+| | `precisionEfficiency` | `0.85` | Precision Reclaimer recovery efficiency (85%). |
+| | `industrialEfficiency` | `0.94` | Industrial Reclaimer recovery efficiency (94%). |
+| | `advancedEfficiency` | `0.98` | Advanced Reclaimer recovery efficiency (98%, max 0.98). |
+| **Stress (SU/RPM)** | `mechanicalStress` | `8.0` | Kinetic stress impact for Tier 1 Mechanical Reclaimer. |
+| | `precisionStress` | `12.0` | Kinetic stress impact for Tier 2 Precision Reclaimer. |
+| | `industrialStress` | `16.0` | Kinetic stress impact for Tier 3 Industrial Reclaimer. |
+| | `advancedStress` | `24.0` | Kinetic stress impact for Tier 4 Advanced Reclaimer. |
+| **Rules** | `enableCraftingFallback` | `true` | Enable safe dynamic crafting recipe deconstruction fallback. |
+| | `scrapConversionRate` | `1.0` | Multiplier for Salvaged Scrap generation on unrecovered fractions. |
 
 ---
 
 ## License
 MIT License. Created for the Create mod ecosystem.
+
 

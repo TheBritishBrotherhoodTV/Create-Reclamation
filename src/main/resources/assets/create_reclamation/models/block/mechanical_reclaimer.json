@@ -5,9 +5,10 @@
 		"casing": "create:block/andesite_casing",
 		"base": "create:block/andesite_casing",
 		"top": "create:block/depot_top",
-		"socket": "create:block/andesite_gearbox",
+		"socket": "create:block/gearbox",
 		"particle": "create:block/andesite_casing"
 	},
+
 
 	"elements": [
 		{
