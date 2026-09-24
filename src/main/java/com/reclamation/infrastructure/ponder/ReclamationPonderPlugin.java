@@ -17,9 +17,15 @@ public class ReclamationPonderPlugin implements PonderPlugin {
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ResourceLocation> sceneHelper = helper.withKeyFunction(r -> r);
-        sceneHelper.forComponents(ModBlocks.MECHANICAL_RECLAIMER.getId())
+        sceneHelper.forComponents(
+                ModBlocks.MECHANICAL_RECLAIMER.getId(),
+                ModBlocks.PRECISION_RECLAIMER.getId(),
+                ModBlocks.INDUSTRIAL_RECLAIMER.getId(),
+                ModBlocks.ADVANCED_RECLAIMER.getId()
+        )
                 .addStoryBoard("mechanical_reclaimer", ReclamationPonders::reclaimerTutorial, ReclamationPonderTags.RECLAMATION)
                 .addStoryBoard("mechanical_reclaimer", ReclamationPonders::reclaimerAutomation, ReclamationPonderTags.RECLAMATION);
+
     }
 
     @Override
@@ -32,5 +38,9 @@ public class ReclamationPonderPlugin implements PonderPlugin {
                 .register();
 
         helper.addTagToComponent(ModBlocks.MECHANICAL_RECLAIMER.getId(), ReclamationPonderTags.RECLAMATION);
+        helper.addTagToComponent(ModBlocks.PRECISION_RECLAIMER.getId(), ReclamationPonderTags.RECLAMATION);
+        helper.addTagToComponent(ModBlocks.INDUSTRIAL_RECLAIMER.getId(), ReclamationPonderTags.RECLAMATION);
+        helper.addTagToComponent(ModBlocks.ADVANCED_RECLAIMER.getId(), ReclamationPonderTags.RECLAMATION);
     }
 }
+
